@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/menuFragment">
+
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.guntermg.colorblindnessapp.ui.menu.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu">
+        <action
+            android:id="@+id/action_menuFragment_to_questFragment"
+            app:destination="@id/questFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/questFragment"
+        android:name="com.guntermg.colorblindnessapp.ui.quest.QuestFragment"
+        android:label="fragment_quest"
+        tools:layout="@layout/fragment_quest" >
+        <action
+            android:id="@+id/action_questFragment_to_testResultFragment"
+            app:destination="@id/testResultFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/testResultFragment"
+        android:name="com.guntermg.colorblindnessapp.ui.result.TestResultFragment"
+        android:label="fragment_test_result"
+        tools:layout="@layout/fragment_test_result" />
+
+</navigation>
