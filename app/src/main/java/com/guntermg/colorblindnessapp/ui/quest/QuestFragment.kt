@@ -8,20 +8,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.guntermg.colorblindnessapp.R
+import com.guntermg.colorblindnessapp.common.BaseVDBFragment
+import com.guntermg.colorblindnessapp.common.Utils
+import com.guntermg.colorblindnessapp.common.initDarkToolbarFragment
 import com.guntermg.colorblindnessapp.databinding.FragmentQuestBinding
 import com.guntermg.colorblindnessapp.ui.model.IshiharaPlate
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class QuestFragment : Fragment() {
-
-    private var _binding: FragmentQuestBinding? = null
-    private val binding: FragmentQuestBinding get() = _binding!!
+class QuestFragment : BaseVDBFragment<FragmentQuestBinding>(R.layout.fragment_quest) {
 
     private val viewModel: QuestViewModel by viewModels()
 
@@ -30,65 +33,61 @@ class QuestFragment : Fragment() {
 
     private val KEY_PARSE_DATA = "RESULTS"
 
-//    @SuppressLint("UseCompatLoadingForDrawables")
-//    private val questions: MutableList<IshiharaPlate> = mutableListOf(
-//        IshiharaPlate(R.drawable.plate1, 12, 12),
-//        IshiharaPlate(R.drawable.plate2, 8, 3),
-//        IshiharaPlate((R.drawable.plate3), 29, 70),
-//        IshiharaPlate((R.drawable.plate4), 5, 2),
-//        IshiharaPlate((R.drawable.plate5), 3, 5),
-//        IshiharaPlate((R.drawable.plate6), 15, 17),
-//        IshiharaPlate((R.drawable.plate7), 74, 21),
-//        IshiharaPlate((R.drawable.plate8), 6, -1),
-//        IshiharaPlate((R.drawable.plate9), 45, -1),
-//        IshiharaPlate((R.drawable.plate10), 5, -1),
-//        IshiharaPlate((R.drawable.plate11), 7, -1),
-//        IshiharaPlate((R.drawable.plate12), 16, -1),
-//        IshiharaPlate((R.drawable.plate13), 73, -1),
-//    )
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentQuestBinding
-            .inflate(
-                inflater,
-                container,
-                false
-            )
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initDarkToolbarFragment(binding.toolbar, getString(R.string.toolbar_which_number))
+
 
         startupFragment()
         setupNextClickListener()
     }
 
     private fun startupFragment() {
-        binding.ivPlate.setImageResource(IshiharaPlate.questions[iterator].src)
+        binding.ivPlate.setImageResource(IshiharaPlate.questions12Plate[iterator].src)
     }
 
     private fun setupNextClickListener() {
         binding.btnNext.setOnClickListener {
-            if (iterator + 1 < IshiharaPlate.questions.size) {
-                answerList.add(binding.etAnswer.text.toString().toInt())
-                iterator++
-                binding.ivPlate.setImageResource(IshiharaPlate.questions[iterator].src)
-                Log.e("answerList", answerList.toString())
+            if (!binding.etAnswer.text.isNullOrBlank()) {
+                if (iterator + 1 < IshiharaPlate.questions12Plate.size) {
+                    answerList.add(binding.etAnswer.text.toString().toInt())
+                    nextImage()
+                } else {
+                    nextFragment()
+                }
+            } else {
+                Toast.makeText(
+                    this.context,
+                    getString(R.string.toast_sem_resposta),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        binding.btnNoNumber.setOnClickListener {
+            if (iterator + 1 < IshiharaPlate.questions12Plate.size) {
+                // adding -1 to list, as plate not recognized
+                answerList.add(-1)
+                nextImage()
             } else {
                 nextFragment()
             }
         }
     }
 
+    private fun nextImage() {
+        iterator++
+        binding.ivPlate.setImageResource(IshiharaPlate.questions12Plate[iterator].src)
+        binding.etAnswer.text.clear()
+        Log.e("answerList", answerList.toString())
+    }
+
     private fun nextFragment() {
-        NavHostFragment.findNavController(this)
-            .navigate(R.id.action_questFragment_to_testResultFragment,
-                Bundle().apply { putIntegerArrayList(KEY_PARSE_DATA, answerList) }
-            )
+        if (findNavController().currentDestination?.id == R.id.questFragment) {
+            NavHostFragment.findNavController(this)
+                .navigate(R.id.action_questFragment_to_testResultFragment,
+                    Bundle().apply { putIntegerArrayList(KEY_PARSE_DATA, answerList) }
+                )
+        }
     }
 }

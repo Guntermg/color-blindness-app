@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">ColorBlindnessApp</string>
+    <string name="toolbar_test_results">Resultado do Teste</string>
+    <string name="toolbar_which_number">Teste de Ishihara</string>
+    <string name="ishihara_geometric">Ishihara com Figuras Geométricas</string>
+    <string name="about_ishihara">Sobre o Teste de Ishihara</string>
+    <string name="edit_text_sua_resposta">Sua Resposta</string>
+    <string name="btn_vamos_la">Vamos lá!</string>
+    <string name="btn_back">Voltar</string>
+    <string name="btn_nao_reconheco">Não Reconheço</string>
+    <string name="toast_sem_resposta">Digite sua resposta ou clique em "Não Reconheço"</string>
+
+<!--    SOBRE TESTE DE ISHIHARA -->
+    <string name="quests_tutorial">Veja atentamente as placas apresentadas.
+\n\nInforme o número escrito na placa. Caso não consiga reconhecer, clique na opção &quot;Não reconheço&quot;. </string>
+
+<!--  RESULTADOS  -->
+    <string name="result_normal">Com base nos resultados do teste, você não possui nenhum tipo de daltonismo.</string>
+
+    <string name="result_color_blind">Com base nos resultados do teste, você apresentou uma tendência ao daltonismo
+monocromático, enxergando apenas tons de preto, branco e cinza. Consulte com um especialista para mais detalhes.</string>
+
+    <string name="result_protanopy">Com base nos resultados do teste, você apresentou uma tendência à variante protanopia do daltonismo.
+        Consulte com um especialista para mais detalhes.</string>
+
+    <string name="result_deuteranopy">Com base nos resultados do teste, você apresentou uma tendência à variante deuteranopia do daltonismo.
+        Consulte com um especialista para mais detalhes.</string>
+
+    <string name="result_red_green">Com base nos resultados do teste, você apresentou uma tendência à daltonismo
+vermelho-verde. Consulte com um especialista para mais detalhes.</string>
+
+    <string name="result_faked">Não foi possível obter um resultado preciso com as respostas.</string>
 </resources>

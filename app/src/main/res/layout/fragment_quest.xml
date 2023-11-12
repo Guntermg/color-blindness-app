@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="Que número você vê nesta imagem?"
+            android:theme="@style/ToolbarTheme"
             app:titleCentered="true" />
 
         <ImageView
@@ -33,16 +33,33 @@
 
         <EditText
             android:id="@+id/etAnswer"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginVertical="16dp"
-            android:hint="Sua resposta"
+            android:hint="@string/edit_text_sua_resposta"
             android:inputType="number"
             app:layout_constraintBottom_toTopOf="@id/btnNext"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnNoNumber"
             app:layout_constraintTop_toBottomOf="@id/ivPlate"
             app:layout_constraintVertical_bias="1" />
+
+        <Button
+            android:id="@+id/btnNoNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginVertical="16dp"
+            android:backgroundTint="@color/background_color"
+            android:text="@string/btn_nao_reconheco"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/etAnswer"
+            app:layout_constraintTop_toBottomOf="@id/ivPlate"
+            app:layout_constraintBottom_toTopOf="@id/btnNext"
+            app:layout_constraintVertical_bias="1"/>
 
         <Button
             android:id="@+id/btnNext"

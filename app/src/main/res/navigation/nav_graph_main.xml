@@ -11,7 +11,20 @@
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu">
         <action
-            android:id="@+id/action_menuFragment_to_questFragment"
+            android:id="@+id/action_menuFragment_to_beforeQuestsFragment"
+            app:destination="@id/beforeQuestsFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/beforeQuestsFragment"
+        android:name="com.guntermg.colorblindnessapp.ui.quest.BeforeQuestsFragment"
+        android:label="fragment_before_quests"
+        tools:layout="@layout/fragment_before_quests" >
+        <action
+            android:id="@+id/action_beforeQuestsFragment_to_questFragment"
             app:destination="@id/questFragment" />
     </fragment>
 
@@ -29,6 +42,20 @@
         android:id="@+id/testResultFragment"
         android:name="com.guntermg.colorblindnessapp.ui.result.TestResultFragment"
         android:label="fragment_test_result"
-        tools:layout="@layout/fragment_test_result" />
+        tools:layout="@layout/fragment_test_result" >
+        <action
+            android:id="@+id/action_testResultFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.guntermg.colorblindnessapp.ui.about.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" >
+        <action
+            android:id="@+id/action_aboutFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
 
 </navigation>

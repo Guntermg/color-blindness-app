@@ -22,12 +22,13 @@ class TestResultAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val resposta = answerList[position].toString()
-        val esperado = IshiharaPlate.questions[position].number.toString()
+        val esperado = IshiharaPlate.questions12Plate[position].number.toString()
 
         holder.binding.let { binding ->
-            binding.tvItemTitle.text = "Palheta 1"
+            binding.tvItemTitle.text = "Palheta ${position+1}"
             binding.tvEsperado.text = "Esperado: ${esperado}"
             binding.tvResposta.text = "Sua resposta: ${resposta}"
+            binding.ivPlate.setImageResource(IshiharaPlate.questions12Plate[position].src)
         }
     }
 
